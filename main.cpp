@@ -5,7 +5,7 @@
 
 using namespace std;
 
-char board[9] = { '0', '1', '2', '3', '4', '5', '6', '7', '8'};
+char board[9] = { '0', '1', '2', '3', '4', '5', '6', '7', '8' };
 int selected_slot;
 bool end_game = false;
 bool turn_active = false;
@@ -32,7 +32,7 @@ void render_board()
 
 void check_win()
 {
-	
+
 	if (board[0] == board[1] && board[0] == board[2])
 	{
 		winner = board[0];
@@ -68,15 +68,11 @@ void check_win()
 		winner = board[2];
 		end_game = true;
 	}
-}
-
-void restart()
-{
-	board[0] = '0'; board[1] = '1'; board[2] = '2'; board[3] = '3'; board[4] = '4'; board[5] = '5'; board[6] = '6'; board[7] = '7'; board[8] = '8';
-	bool end_game = false;
-	bool turn_active = false;
-	char winner = NULL;
-	char current_turn = NULL;
+	if (board[3] == board[4] && board[3] == board[5])
+	{
+		winner = board[3];
+		end_game = true;
+	}
 }
 
 void end()
@@ -86,17 +82,18 @@ void end()
 
 	if (winner == 'X') {
 		cout << "	" << "Congradulations Player 1, you won!\n\n";
-	}else if(winner == 'O')
+	}
+	else if (winner == 'O')
 	{
 		cout << "	" << "Congradulations Player 2, you won!\n\n";
 	}
-	else 
+	else
 	{
 		cout << "	" << "It's a tie!\n\n";
 	}
-	
+
 	cout << "	" << "Thank you for playing! To quit press ESC\n\a";
-	
+
 	char key_press = _getch();
 	int ascii_value = key_press;
 
@@ -115,7 +112,7 @@ void turn()
 {
 	turn_active = true;
 	int input;
-	
+
 	if (turns == 8) {
 		end_game = true;
 	}
@@ -136,43 +133,43 @@ void turn()
 	{
 		cout << "	" << "It's your turn, Player 2, pick a slot\n";
 	}
-	
-		if (current_turn == 'X')
-		{						
-			cout << "		        >";
-			cin >> input;
-			
-			if (board[input] == 'O' || board[input] == 'X') 
-			{
-				cout << "		    " << "Invalid slot\n";
-				invalid_turn = true;
-				invaid_turn_char = 'X';
-				Sleep(500);
-			}
-			else {
-				turns++;
-				board[input] = 'X';
-			}
-			current_turn = 'O';
 
-		}
-		else if (current_turn == 'O')
-		{						
-			cout << "		        >";
-			cin >> input;
+	if (current_turn == 'X')
+	{
+		cout << "		        >";
+		cin >> input;
 
-			if (board[input] == 'X' || board[input] == 'O') {
-				cout << "		    " << "Invalid slot\n";
-				invalid_turn = true;
-				invaid_turn_char = 'O';
-				Sleep(500);
-			}
-			else {
-				turns++;
-				board[input] = 'O';
-			}
-			current_turn = 'X';
+		if (board[input] == 'O' || board[input] == 'X')
+		{
+			cout << "		    " << "Invalid slot\n";
+			invalid_turn = true;
+			invaid_turn_char = 'X';
+			Sleep(500);
 		}
+		else {
+			turns++;
+			board[input] = 'X';
+		}
+		current_turn = 'O';
+
+	}
+	else if (current_turn == 'O')
+	{
+		cout << "		        >";
+		cin >> input;
+
+		if (board[input] == 'X' || board[input] == 'O') {
+			cout << "		    " << "Invalid slot\n";
+			invalid_turn = true;
+			invaid_turn_char = 'O';
+			Sleep(500);
+		}
+		else {
+			turns++;
+			board[input] = 'O';
+		}
+		current_turn = 'X';
+	}
 
 	system("CLS");
 	render_info();
@@ -181,7 +178,7 @@ void turn()
 	turn_active = false;
 }
 
-int main(int argc, char **argv[]) 
+int main(int argc, char** argv[])
 {
 	render_info();
 	render_board();
@@ -191,7 +188,7 @@ int main(int argc, char **argv[])
 		turn();
 	}
 
-	if (end_game == true) 
+	if (end_game == true)
 	{
 		end();
 	}
