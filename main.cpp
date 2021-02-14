@@ -5,7 +5,6 @@
 
 using namespace std;
 
-/*Variables*/
 char board[9] = { '0', '1', '2', '3', '4', '5', '6', '7', '8'};
 int selected_slot;
 bool end_game = false;
